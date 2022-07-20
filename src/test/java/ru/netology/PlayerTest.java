@@ -44,7 +44,7 @@ public class PlayerTest {
         assertEquals (expected, actual);
     }
 
-    //Проверяем, сохраняются ли данные после установки уже установненной ранее игры - одинаковый ключ name
+    //Проверяем, сохраняются ли данные после установки уже установленной ранее игры - одинаковый ключ name
     //Можно проверить после доработки play
     @Test
     public void installGameIsAlreadyInstalled() {
