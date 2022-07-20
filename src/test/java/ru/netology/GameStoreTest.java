@@ -20,15 +20,7 @@ public class GameStoreTest {
         GameStore store = new GameStore();
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
         Game game2 = new Game("Нетология Основы Git", "Аркады", store);
-        assertFalse(store.containsGame(game) && store.containsGame(game2));
-    }
-
-    @Test
-    public void shouldReturnFalseContainsGame() {
-
-        GameStore store = new GameStore();
-        Game game2 = new Game("Нетология Основы Git", "Аркады", store);
-        assertFalse(store.containsGame(game2));
+        assertTrue(store.containsGame(game) && store.containsGame(game2));
     }
 
     @Test
@@ -36,13 +28,15 @@ public class GameStoreTest {
 
         GameStore store = new GameStore();
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
-        store.addPlayTime("Leonid", 0);
+        store.addPlayTime("Leonid", 3);
+        store.addPlayTime("Valentina", 1);
+        store.addPlayTime("Philip", 2);
         String actual = store.getMostPlayer();
         String expected = "Leonid";
         assertEquals(expected, actual);
     }
 
-    @Test   // ищет игрока, который проиграл больше всего времени (отсутствующих игроков)
+    @Test   // ищет игрока, который играл больше всего времени
     public void shouldGetMostPlayerReturnNull() {
 
         GameStore store = new GameStore();
@@ -71,13 +65,21 @@ public class GameStoreTest {
         assertEquals(expected, actual);
 
     }
-    @Test // сумма часов игроков
+
+    @Test // сумма часов всех игроков
     public void shouldSumTime() {
         GameStore store = new GameStore();
         store.addPlayTime("Leonid", 1);
         store.addPlayTime("Valentina", 1);
         store.addPlayTime("Philip", 1);
         assertEquals(3, store.getSumPlayedTime());
+    }
+    @Test // время, которое проиграл игрок за игрой этого каталога.
+    public void shouldAddPlayedTime() {
+        GameStore store = new GameStore();
+        store.addPlayTime("Leonid", 1);
+        store.addPlayTime("Leonid", 1);
+        //assertEquals(2, store.getPlayTime("Leonid"));
     }
 
 }
