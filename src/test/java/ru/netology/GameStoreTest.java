@@ -20,7 +20,7 @@ public class GameStoreTest {
         GameStore store = new GameStore();
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
         Game game2 = new Game("Нетология Основы Git", "Аркады", store);
-        assertTrue(store.containsGame(game));
+        assertTrue(store.containsGame(game2));
     }
 
     @Test
