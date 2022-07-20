@@ -36,7 +36,7 @@ public class GameStoreTest {
         assertEquals(expected, actual);
     }
 
-    @Test   // ищет игрока, который проиграл больше всего времени (отсутствующих игроков)
+    @Test   // ищет игрока, который играл больше всего времени
     public void shouldGetMostPlayerReturnNull() {
 
         GameStore store = new GameStore();
@@ -65,13 +65,21 @@ public class GameStoreTest {
         assertEquals(expected, actual);
 
     }
+
     @Test // сумма часов всех игроков
     public void shouldSumTime() {
         GameStore store = new GameStore();
-        store.addPlayTime( "Leonid",  1);
+        store.addPlayTime("Leonid", 1);
         store.addPlayTime("Valentina", 1);
         store.addPlayTime("Philip", 1);
         assertEquals(3, store.getSumPlayedTime());
+    }
+    @Test // время, которое проиграл игрок за игрой этого каталога.
+    public void shouldAddPlayedTime() {
+        GameStore store = new GameStore();
+        store.addPlayTime("Leonid", 1);
+        store.addPlayTime("Leonid", 1);
+        //assertEquals(2, store.getPlayTime("Leonid"));
     }
 
 }
