@@ -22,15 +22,22 @@ public class GameStoreTest {
         Game game2 = store.publishGame("Нетология Основы Git", "Аркады");
         assertTrue(store.containsGame(game2));
     }
+    @Test
+    public void shouldAddFalseGames() {
+
+        GameStore store = new GameStore();
+        Game game3 = new Game("Нетология Введение В Java", "Приключения", store);
+        assertFalse(store.containsGame(game3));
+    }
 
     @Test
-    public void shouldGetMostPlayerEqualsZero() {
+    public void shouldGetMostPlayerEquals() {
 
         GameStore store = new GameStore();
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
         store.addPlayTime("Leonid", 3);
         store.addPlayTime("Valentina", 1);
-        store.addPlayTime("Philip", 2);
+        store.addPlayTime("Philip", 3);
         String actual = store.getMostPlayer();
         String expected = "Leonid";
         assertEquals(expected, actual);
@@ -79,7 +86,7 @@ public class GameStoreTest {
         GameStore store = new GameStore();
         store.addPlayTime("Leonid", 1);
         store.addPlayTime("Leonid", 1);
-        //assertEquals(2, store.getPlayTime("Leonid"));
+        assertEquals(2, store.getSumPlayedTime());
     }
 
 }
