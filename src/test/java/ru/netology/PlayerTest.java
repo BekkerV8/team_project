@@ -100,22 +100,26 @@ public class PlayerTest {
         GameStore store = new GameStore();
         Game game1 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
         Game game2 = store.publishGame("Нетология Основы Git", "Аркады");
-        Game game3 = store.publishGame("Нетология Java для тестировщиков", "Хоррор");
+        Game game3 = store.publishGame("Нетология Java для тестировщиков", "Аркады");
+        Game game4 = store.publishGame("Автоматизация тестирования на Java", "Хоррор");
         Player player = new Player("Petya");
         player.installGame(game1);
         player.installGame(game2);
         player.installGame(game3);
-        player.play(game1,3);
-        player.play(game2,4);
-        player.play(game3,5);
-        player.play(game1,3);
+        player.installGame(game4);
+        player.play(game2,3);
+        player.play(game3,4);
+        player.play(game1,5);
+        player.play(game2,3);
+        player.play(game4,2);
 
         String searchGenre = "Аркады";
 
-        Game expected = game1;
+        Game expected = game2;
         Game actual = player.mostPlayerByGenre(searchGenre);
         assertEquals (expected, actual);
     }
+
 
     //Поверяем игру отсутствующего жанра
     @Test
@@ -169,6 +173,17 @@ public class PlayerTest {
         Assertions.assertThrows(RuntimeException.class, () -> {
             player.play(game, 3);
         });
+    }
+
+    //Узнаем имя игрока
+    @Test
+    public void getNamePlayer() {
+
+        Player player = new Player("Petya");
+
+        String expected = "Petya";
+        String actual = player.getName();
+        assertEquals(expected, actual);
     }
 
 }
