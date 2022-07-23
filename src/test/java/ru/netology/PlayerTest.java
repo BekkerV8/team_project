@@ -107,11 +107,10 @@ public class PlayerTest {
         player.installGame(game2);
         player.installGame(game3);
         player.installGame(game4);
-        player.play(game2,3);
+        player.play(game1,3);
+        player.play(game2,5);
         player.play(game3,4);
-        player.play(game1,5);
-        player.play(game2,3);
-        player.play(game4,2);
+        player.play(game4,7);
 
         String searchGenre = "Аркады";
 
@@ -174,6 +173,20 @@ public class PlayerTest {
             player.play(game, 3);
         });
     }
+
+    //Передаем отрицательное время игры
+    @Test
+    public void playGameNotValidTime() {
+        GameStore store = new GameStore();
+        Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        Player player = new Player("Petya");
+        player.installGame(game);
+
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            player.play(game, -3);
+        });
+    }
+
 
     //Узнаем имя игрока
     @Test
